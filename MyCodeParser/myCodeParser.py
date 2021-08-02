@@ -83,19 +83,20 @@ def parse():
     GO_LANGUAGE = Language('build/my-languages.so', 'go')
     JS_LANGUAGE = Language('build/my-languages.so', 'javascript')
     PY_LANGUAGE = Language('build/my-languages.so', 'python')
+    JAVA_LANGUAGE = Language('build/my-languages.so', 'java')
     CSHARP_LANGUAGE = Language('build/my-languages.so', 'c_sharp')
-    Languages = {"python": PY_LANGUAGE, "csharp": CSHARP_LANGUAGE}
+    Languages = {"python": PY_LANGUAGE, "csharp": CSHARP_LANGUAGE, "java": JAVA_LANGUAGE}
     NamespaceQueries = {"python" : "", 
                        "csharp": """(namespace_declaration name: (identifier) @Namespace)""",
                        "java" : ""
                       }
-    ClassQueries = {"python" : "", 
+    ClassQueries = {"python" : """(class_definition name: (identifier) @Class)""", 
                        "csharp": """(class_declaration name: (identifier) @Class)""",
-                       "java" : ""
+                       "java" : """(class_declaration name: (identifier) @Class)""",
                       }
-    MethodQueries = {"python" : "", 
+    MethodQueries = {"python" : """(function_definition name: (identifier) @Method)""",
                        "csharp": """(method_declaration name: (identifier) @Method)""",
-                       "java" : ""
+                       "java" : """(method_declaration name: (identifier) @Method)"""
                       }
 
     AllQueries = {"namespace": NamespaceQueries, 
